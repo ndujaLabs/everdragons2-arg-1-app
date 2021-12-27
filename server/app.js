@@ -50,12 +50,21 @@ app.get('/', function (req, res, next) {
 })
 
 function getS3Image(req) {
-  let ip = req.headers['x-forwarded-for']
-  let img = `map${ip.pop()}.jpg`
-  console.log(img)
+  // for (let k in req) {
+  //   if (typeof req[k] !== 'function') {
+  //     console.log(k, req[k])
+  //   }
+  // }
+  console.log(req.headers)
+  console.log(req.rawHeaders)
 
-  let hash = ethers.utils.id(img)
-  return hash.substring(4, 16)
+
+  // let ip = req.headers['x-forwarded-for']
+  // let img = `map${ip.pop()}.jpg`
+  // console.log(img)
+  //
+  // let hash = ethers.utils.id(img)
+  // return hash.substring(4, 16)
 }
 
 
