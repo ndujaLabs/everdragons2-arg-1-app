@@ -51,7 +51,7 @@ app.get('/', function (req, res, next) {
 
 function getS3Image(req) {
   for (let k in req) {
-    if (typeof req[k] !== 'object') {
+    if (typeof req[k] !== 'function') {
       console.log(k, req[k])
     }
   }
