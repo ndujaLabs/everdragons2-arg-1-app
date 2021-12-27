@@ -50,19 +50,8 @@ app.get('/', function (req, res, next) {
 })
 
 function getS3Image(req) {
-  // for (let k in req) {
-  //   if (typeof req[k] !== 'function') {
-  //     console.log(k, req[k])
-  //   }
-  // }
-  console.log(req.headers['x-real-ip'])
-  console.log(req.rawHeaders)
-
-
   let ip = req.headers['x-real-ip'].split('')
   let img = `map${ip.pop()}.jpg`
-  console.log(img)
-
   let hash = ethers.utils.id(img)
   return hash.substring(4, 16)
 }
@@ -70,25 +59,21 @@ function getS3Image(req) {
 
 app.use('/:anything', function (req, res, next) {
   let v = req.params.anything
-  // uncomment when ready to activate them
-
-  getS3Image(req)
-  console.log(v)
   if (/neo-anti/.test(req.hostname)) {
-    // if (v === 'the-guild-manifest-104') {
-    //   return res.send(getSource('the-guild-manifest-104'))
-    // }
-    // if (v === 'look-out-for-yourself') {
-    //   return res.send(res.redirect('look-out-for-yourself'))
-    // }
+    if (v === 'the-guild-manifest-104' && process.env.TGM) {
+      return res.send(getSource('the-guild-manifest-104'))
+    }
+    if (v === 'look-out-for-yourself' && process.env.LOFY) {
+      return res.send(res.redirect('look-out-for-yourself'))
+    }
   } else {
-    // if (v === 'all-the-ravens') {
-    //   return res.send(getSource('all-the-ravens'))
-    // }
+    if (v === 'all-the-ravens' && process.env.ATR) {
+      return res.send(getSource('all-the-ravens'))
+    }
     // if (v === 'we-hacked-you-stupid') {
     //   return res.send(getSource('we-hacked-you-stupid'))
     // }
-    if (v === 'agdaroth+cries+fire') {
+    if (v === 'agdaroth+cries+fire' && process.env.ACF) {
       let source = getSource('agdaroth+cries+fire')
       let image = getS3Image(req)
 
