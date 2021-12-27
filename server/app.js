@@ -52,23 +52,24 @@ app.get('/', function (req, res, next) {
 app.use('/:anything', function (req, res, next) {
   let v = req.params.anything
   // uncomment when ready to activate them
+  console.log(v)
   if (/neo-anti/.test(req.hostname)) {
-    if (v === 'the-guild-manifest-104') {
-      return res.send(getSource('the-guild-manifest-104'))
-    }
-    if (v === 'look-out-for-yourself') {
-      return res.send(res.redirect('look-out-for-yourself'))
-    }
+    // if (v === 'the-guild-manifest-104') {
+    //   return res.send(getSource('the-guild-manifest-104'))
+    // }
+    // if (v === 'look-out-for-yourself') {
+    //   return res.send(res.redirect('look-out-for-yourself'))
+    // }
   } else {
-    if (v === 'all-the-ravens') {
-      return res.send(getSource('all-the-ravens'))
-    }
+    // if (v === 'all-the-ravens') {
+    //   return res.send(getSource('all-the-ravens'))
+    // }
     // if (v === 'we-hacked-you-stupid') {
     //   return res.send(getSource('we-hacked-you-stupid'))
     // }
-    if (v === 'agdaroth+cries+fire') {
-      return res.send(getSource('agdaroth+cries+fire'))
-    }
+    // if (v === 'agdaroth+cries+fire') {
+    //   return res.send(getSource('agdaroth+cries+fire'))
+    // }
   }
   next()
 })
