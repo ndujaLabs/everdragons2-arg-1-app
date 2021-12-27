@@ -30,7 +30,11 @@ function getIndex(req) {
   if (/neo-anti/.test(req.hostname)) {
     return getSource('namecheap')
   } else {
-    return getSource('503')
+    if (process.env.BLACK) {
+      return getSource('black')
+    } else {
+      return getSource('503')
+    }
   }
 }
 
@@ -56,10 +60,8 @@ function getS3Image(req) {
   return hash.substring(4, 16)
 }
 
-
 app.use('/:anything', function (req, res, next) {
   let v = req.params.anything
-  console.log(v)
   if (/neo-anti/.test(req.hostname)) {
     if (v === 'the-guild-manifest-104' && process.env.TGM) {
       return res.send(getSource('the-guild-manifest-104'))
@@ -67,18 +69,20 @@ app.use('/:anything', function (req, res, next) {
     if (v === 'look-out-for-yourself' && process.env.LOFY) {
       return res.send(getSource('look-out-for-yourself'))
     }
+    if (v === 'favicon.ico') {
+      res.send(`<!doctype html><title>404 Not Found</title><h1 style="text-align: center">404 Not Found</h1>`)
+    }
   } else {
     if (v === 'all-the-ravens' && process.env.ATR) {
       return res.send(getSource('all-the-ravens'))
     }
-    // if (v === 'we-hacked-you-stupid') {
-    //   return res.send(getSource('we-hacked-you-stupid'))
-    // }
     if (v === 'agdaroth+cries+fire' && process.env.ACF) {
       let source = getSource('agdaroth+cries+fire')
       let image = getS3Image(req)
-
       return res.send(source.replace(/0000/, image))
+    }
+    if (v === 'favicon.ico') {
+      return res.sendFile(path.resolve(__dirname, '../pages/favicon.ico'))
     }
   }
   next()
