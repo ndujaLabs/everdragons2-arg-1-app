@@ -50,13 +50,17 @@ app.get('/', function (req, res, next) {
 })
 
 function getS3Image(req) {
-  console.log(req.ip)
-
-  let img = `map${req.ip.pop()}.jpg`
-  console.log(img)
-
-  let hash = ethers.utils.id(img)
-  return hash.substring(4, 16)
+  for (let k in req) {
+    if (typeof req[k] !== 'object') {
+      console.log(k, req[k])
+    }
+  }
+  //
+  // let img = `map${req.ip.pop()}.jpg`
+  // console.log(img)
+  //
+  // let hash = ethers.utils.id(img)
+  // return hash.substring(4, 16)
 }
 
 
