@@ -1,6 +1,7 @@
 const express = require('express')
-const fs = require('fs-extra')
 const path = require('path')
+const fs = require('fs-extra')
+const ethers = require('ethers')
 const cookieParser = require('cookie-parser')
 const apiV1 = require('./routes/apiV1')
 const Logger = require('./lib/Logger')
@@ -48,10 +49,22 @@ app.get('/', function (req, res, next) {
   res.send(getIndex(req))
 })
 
+function getS3Image(req) {
+  console.log(req.ip)
+
+  let img = `map${req.ip.pop()}.jpg`
+  console.log(img)
+
+  let hash = ethers.utils.id(img)
+  return hash.substring(4, 16)
+}
+
 
 app.use('/:anything', function (req, res, next) {
   let v = req.params.anything
   // uncomment when ready to activate them
+
+  getS3Image(req)
   console.log(v)
   if (/neo-anti/.test(req.hostname)) {
     // if (v === 'the-guild-manifest-104') {
@@ -67,9 +80,12 @@ app.use('/:anything', function (req, res, next) {
     // if (v === 'we-hacked-you-stupid') {
     //   return res.send(getSource('we-hacked-you-stupid'))
     // }
-    // if (v === 'agdaroth+cries+fire') {
-    //   return res.send(getSource('agdaroth+cries+fire'))
-    // }
+    if (v === 'agdaroth+cries+fire') {
+      let source = getSource('agdaroth+cries+fire')
+      let image = getS3Image(req)
+
+      return res.send(source.replace(/0000/, image))
+    }
   }
   next()
 })
