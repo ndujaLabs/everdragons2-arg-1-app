@@ -1,0 +1,91 @@
+{
+  "name": "bolero",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A game",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ndujalags/bolero.git"
+  },
+  "author": "Francesco Sullo <francesco@sullo.co>",
+  "license": "MIT",
+  "dependencies": {
+    "@ethersproject/contracts": "^5.1.0",
+    "@ethersproject/providers": "^5.1.0",
+    "body-parser": "^1.19.0",
+    "chalk": "^2.4.2",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "discord.js": "^12.5.3",
+    "dotenv": "^9.0.2",
+    "eth-sig-util": "^3.0.1",
+    "ethereumjs-util": "^7.0.10",
+    "ethers": "^5.1.4",
+    "express": "^4.17.1",
+    "fs-extra": "^8.1.0",
+    "ipfs-http-client": "^49.0.4",
+    "knex": "^0.21.12",
+    "local-storage": "^1.4.2",
+    "lodash": "^4.17.21",
+    "query-string": "^7.0.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-markdown": "^6.0.1",
+    "react-markdown-it": "^1.0.2",
+    "react-password-strength-bar": "^0.3.2",
+    "react-player": "^2.9.0",
+    "react-scroll": "^1.8.4",
+    "react-webcam": "^5.2.3",
+    "require-or-mock": "^0.2.1",
+    "simple-json-db": "^1.2.3",
+    "superagent": "^4.1.0",
+    "video-react": "^0.14.1",
+    "web3modal": "^1.9.3"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-react-transform": "^2.0.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "css-loader": "^3.6.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^6.10.3",
+    "mocha": "^8.2.1",
+    "webpack": "^2.7.0"
+  },
+  "scripts": {
+    "start": "node .",
+    "start:dev": "NODE_ENV=development node .",
+    "build": "webpack",
+    "docker-build": "docker buildx build --platform linux/amd64 -t everdragons2-app -f docker/Dockerfile .",
+    "docker-run": "docker run --rm -p 6789:6789 everdragons2-app",
+    "lint": "npm run lint:client && npm run lint:server",
+    "lint:client": "eslint client/**/*.js",
+    "lint:server": "eslint server/**/*.js",
+    "dev": "npm run build && npm run start:dev"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
