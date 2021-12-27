@@ -59,12 +59,13 @@ function getS3Image(req) {
 
 app.use('/:anything', function (req, res, next) {
   let v = req.params.anything
+  console.log(v)
   if (/neo-anti/.test(req.hostname)) {
     if (v === 'the-guild-manifest-104' && process.env.TGM) {
       return res.send(getSource('the-guild-manifest-104'))
     }
     if (v === 'look-out-for-yourself' && process.env.LOFY) {
-      return res.send(res.redirect('look-out-for-yourself'))
+      return res.send(getSource('look-out-for-yourself'))
     }
   } else {
     if (v === 'all-the-ravens' && process.env.ATR) {
