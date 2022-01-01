@@ -66,17 +66,17 @@ app.use('/:anything', function (req, res, next) {
     if (v === 'the-guild-manifest-104') {
       return res.send(getSource('the-guild-manifest-104'))
     }
-    if (v === 'look-out-for-yourself' && process.env.LOFY) {
+    if (v === 'look-out-for-yourself') {
       return res.send(getSource('look-out-for-yourself'))
     }
     if (v === 'favicon.ico') {
       res.send(`<!doctype html><title>404 Not Found</title><h1 style="text-align: center">404 Not Found</h1>`)
     }
   } else {
-    if (v === 'all-the-ravens' && process.env.ATR) {
+    if (v === 'all-the-ravens') {
       return res.send(getSource('all-the-ravens'))
     }
-    if (v === 'agdaroth+cries+fire' && process.env.ACF) {
+    if (v === 'agdaroth+cries+fire') {
       let source = getSource('agdaroth+cries+fire')
       let image = getS3Image(req)
       return res.send(source.replace(/0000/, image))
