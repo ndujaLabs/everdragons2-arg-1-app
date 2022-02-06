@@ -13,8 +13,9 @@ process.on('uncaughtException', function (error) {
   Logger.error(error.message)
   Logger.error(error.stack)
 
-  // if(!error.isOperational)
+  // if(!error.isOperational) {
   //   process.exit(1)
+  // }
 })
 
 let indexes = {}
@@ -93,38 +94,6 @@ app.use(express.static(path.resolve(__dirname, '../public')))
 app.use(function (req, res, next) {
   res.send(`<!doctype html><title>404 Not Found</title><h1 style="text-align: center">404 Not Found</h1>`)
 })
-
-// if (app.get('env') === 'development') {
-//   app.use((err, req, res, next) => {
-//     res.status(err.status || 500).json({
-//       title: 'Error',
-//       message: err.message,
-//       error: err
-//     })
-//   })
-// }
-//
-// // error handler
-// app.use(function (err, req, res, next) {
-//
-//   console.debug(err)
-//   console.debug(err.status)
-//   console.debug(err.message)
-//
-//   // set locals, only providing error in development
-//   res.locals.message = err.message
-//   res.locals.error = req.app.get('env') === 'development' ? err : {}
-//
-//   // render the error page
-//   res.status(err.status || 500)
-//   res.json({error: 'Error'})
-// })
-//
-// app.closeDb = () => {
-//   // if (db.isOpen()) {
-//   //   db.close()
-//   // }
-// }
 
 module.exports = app
 
